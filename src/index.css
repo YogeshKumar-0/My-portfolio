@@ -1,0 +1,64 @@
+/* Palette colors */
+:root {
+  --clr-bg: #fefae0;
+  --clr-primary: #ccd5ae;
+  --clr-secondary: #e9edc9;
+  --clr-accent: #faedcd;
+  --clr-highlight: #d4a373;
+  --clr-text: #333;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  overflow-x: hidden;
+}
+
+/* Section headings */
+h2 {
+  color: var(--clr-highlight);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid var(--clr-accent);
+  padding-bottom: 0.3rem;
+}
+
+/* Tables styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  background-color: var(--clr-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--clr-primary);
+  color: var(--clr-text);
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--clr-accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  main.content {
+    padding: 1rem 1.5rem;
+    max-width: 100%;
+  }
+}

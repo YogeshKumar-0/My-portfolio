@@ -1,6 +1,7 @@
 import { Container, Heading, SimpleGrid, Link, Text, HStack, Tag, Button } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 import ThreeDCard from '../components/ThreeDCard';
+import PageTransition from '../components/PageTransition';
 
 const projects = [
   {
@@ -19,27 +20,29 @@ const projects = [
 
 function ProjectsPage() {
   return (
-    <Container maxW="container.xl" py={10}>
-      <Heading as="h1" mb={8} textAlign="center" color="gray.100">
-        My Projects
-      </Heading>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-        {projects.map((project, index) => (
-          <ThreeDCard key={index}>
-            <Heading size="md" mb={4} color="brand.500">{project.title}</Heading>
-            <Text mb={4}>{project.description}</Text>
-            <HStack spacing={2} mb={4}>
-              {project.tags.map((tag) => (
-                <Tag key={tag} variant="solid" colorScheme="gray">{tag}</Tag>
-              ))}
-            </HStack>
-            <Button as={Link} href={project.codeUrl} isExternal leftIcon={<FaGithub />}>
-              View Code
-            </Button>
-          </ThreeDCard>
-        ))}
-      </SimpleGrid>
-    </Container>
+    <PageTransition>
+      <Container maxW="container.xl" py={10}>
+        <Heading as="h1" mb={8} textAlign="center" color="gray.100">
+          My Projects
+        </Heading>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+          {projects.map((project, index) => (
+            <ThreeDCard key={index}>
+              <Heading size="md" mb={4} color="brand.500">{project.title}</Heading>
+              <Text mb={4}>{project.description}</Text>
+              <HStack spacing={2} mb={4}>
+                {project.tags.map((tag) => (
+                  <Tag key={tag} variant="solid" colorScheme="gray">{tag}</Tag>
+                ))}
+              </HStack>
+              <Button as={Link} href={project.codeUrl} isExternal leftIcon={<FaGithub />}>
+                View Code
+              </Button>
+            </ThreeDCard>
+          ))}
+        </SimpleGrid>
+      </Container>
+    </PageTransition>
   );
 }
 

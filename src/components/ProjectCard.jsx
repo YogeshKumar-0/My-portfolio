@@ -1,17 +1,20 @@
 // src/components/ProjectCard.jsx
 import { Box, Heading, Text, Tag, HStack, VStack, Image, Button, Link } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
+import { motion } from "framer-motion";
+const MotionCard = motion(VStack);
 
 function ProjectCard({ title, description, imageUrl, tags, liveUrl, codeUrl }) {
   return (
-    <VStack
+    <MotionCard
       border="1px"
       borderColor="gray.200"
       borderRadius="lg"
       p={4}
       spacing={4}
       align="start"
-      _hover={{ boxShadow: 'lg', transform: 'translateY(-5px)', transition: '0.2s' }}
+      whileHover={{ y: -10, scale: 1.03 }}
+      transition={{ duration: 0.3 }}
     >
       <Image src={imageUrl} alt={title} borderRadius="md" objectFit="cover" h="200px" w="100%" />
       <Heading size="md">{title}</Heading>
@@ -29,7 +32,7 @@ function ProjectCard({ title, description, imageUrl, tags, liveUrl, codeUrl }) {
           View Code
         </Button>
       </HStack>
-    </VStack>
+    </MotionCard>
   );
 }
 

@@ -10,20 +10,27 @@ import AboutPage from './pages/AboutPage';
 import EducationPage from './pages/EducationPage';
 import SkillsPage from './pages/SkillsPage';
 import CertificatesPage from './pages/CertificatesPage';
+import SnowBackground from "./components/SnowBackground";
+import { AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
   return (
     <Box>
+      <SnowBackground />
       <NavBar />
       <Box p={4} minH="calc(100vh - 128px)">
-        <Routes>
-          <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
-          <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
-          <Route path="/education" element={<AnimatedPage><EducationPage /></AnimatedPage>} />
-          <Route path="/skills" element={<AnimatedPage><SkillsPage /></AnimatedPage>} />
-          <Route path="/certificates" element={<AnimatedPage><CertificatesPage /></AnimatedPage>} />
-          <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/education" element={<EducationPage />} />
+            <Route path="/certificates" element={<CertificatesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </AnimatePresence>
       </Box>
       <Footer />
     </Box>

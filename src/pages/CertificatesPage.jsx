@@ -2,6 +2,7 @@
 import { Container, Heading, VStack, Link, Icon, Text } from '@chakra-ui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import ThreeDCard from '../components/ThreeDCard'; // Import the component
+import PageTransition from '../components/PageTransition';
 
 const certificateData = [
   {
@@ -24,30 +25,32 @@ const certificateData = [
 
 function CertificatesPage() {
   return (
-    <Container maxW="container.md" py={10}>
-      <VStack spacing={6}>
-        <Heading as="h1" color="gray.100">Certificates & Projects</Heading>
-        {certificateData.map((cert, index) => (
-          <Link
-            key={index}
-            href={cert.url}
-            isExternal
-            w="100%"
-            _hover={{ textDecoration: 'none' }}
-          >
-            {/* Replace the inner <Box> with <ThreeDCard> */}
-            <ThreeDCard
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
+    <PageTransition>
+      <Container maxW="container.md" py={10}>
+        <VStack spacing={6}>
+          <Heading as="h1" color="gray.100">Certificates & Projects</Heading>
+          {certificateData.map((cert, index) => (
+            <Link
+              key={index}
+              href={cert.url}
+              isExternal
+              w="100%"
+              _hover={{ textDecoration: 'none' }}
             >
-              <Text fontWeight="medium" color="gray.200">{cert.name}</Text>
-              <Icon as={FaExternalLinkAlt} color="gray.400" />
-            </ThreeDCard>
-          </Link>
-        ))}
-      </VStack>
-    </Container>
+              {/* Replace the inner <Box> with <ThreeDCard> */}
+              <ThreeDCard
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text fontWeight="medium" color="gray.200">{cert.name}</Text>
+                <Icon as={FaExternalLinkAlt} color="gray.400" />
+              </ThreeDCard>
+            </Link>
+          ))}
+        </VStack>
+      </Container>
+    </PageTransition>
   );
 }
 

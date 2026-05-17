@@ -1,40 +1,57 @@
-// src/App.jsx
-import { Box } from '@chakra-ui/react';
-import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/Navbar';
+import React from 'react';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AnimatedPage from './components/AnimatedPage';
+import SnowBackground from './components/SnowBackground';
+
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
-import AboutPage from './pages/AboutPage';
 import EducationPage from './pages/EducationPage';
 import SkillsPage from './pages/SkillsPage';
 import CertificatesPage from './pages/CertificatesPage';
-import SnowBackground from "./components/SnowBackground";
-import { AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import AboutPage from './pages/AboutPage';
 
-function App() {
-  const location = useLocation();
+import { useActiveSection } from './components/useActiveSection';
+
+export default function App() {
+  const sectionIds = ['home', 'projects', 'education', 'skills', 'certificates', 'about'];
+  const activeSection = useActiveSection(sectionIds);
+
   return (
-    <Box>
+    <div className="bg-[#0a192f] min-h-screen text-slate-100 relative overflow-x-hidden selection:bg-[#64ffda]/30 selection:text-[#64ffda]">
+      {/* Background canvases */}
       <SnowBackground />
-      <NavBar />
-      <Box p={4} minH="calc(100vh - 128px)">
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/education" element={<EducationPage />} />
-            <Route path="/certificates" element={<CertificatesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-        </AnimatePresence>
-      </Box>
+
+      {/* Synchronized Header Tracker */}
+      <Navbar activeSection={activeSection} />
+
+      <main className="w-full">
+        {/* scroll-mt-16 maps margin offset for the fixed layout navbar */}
+        <div id="home" className="min-h-[90vh] flex items-center scroll-mt-16">
+          <HomePage />
+        </div>
+
+        <div id="projects" className="py-16 border-t border-slate-800/60 scroll-mt-16">
+          <ProjectsPage />
+        </div>
+
+        <div id="education" className="py-16 border-t border-slate-800/60 scroll-mt-16">
+          <EducationPage />
+        </div>
+
+        <div id="skills" className="py-16 border-t border-slate-800/60 scroll-mt-16">
+          <SkillsPage />
+        </div>
+
+        <div id="certificates" className="py-16 border-t border-slate-800/60 scroll-mt-16">
+          <CertificatesPage />
+        </div>
+
+        <div id="about" className="py-16 border-t border-slate-800/60 scroll-mt-16 mb-12">
+          <AboutPage />
+        </div>
+      </main>
+
       <Footer />
-    </Box>
+    </div>
   );
 }
-
-export default App;

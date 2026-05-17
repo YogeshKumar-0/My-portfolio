@@ -1,25 +1,43 @@
-// src/components/Footer.jsx
-import { Box, Text, Link, HStack, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 function Footer() {
   return (
-    <Box as="footer" py={6} px={8} mt={10}>
-      <VStack spacing={4}>
-        <HStack spacing={6}>
-          <Link href="https://github.com/YogeshKumar-0" isExternal _hover={{ color: 'brand.500', transform: 'scale(1.2)' }} transition="all 0.2s">
+    <footer className="w-full bg-[#0a192f] py-8 px-8 mt-16 border-t border-slate-800/60">
+      <div className="flex flex-col items-center space-y-4">
+        {/* Social Icons Container */}
+        <div className="flex items-center space-x-6 text-gray-400">
+          <a
+            href="https://github.com/YogeshKumar-0"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-all duration-200 hover:text-[#64ffda] hover:scale-125"
+          >
             <FaGithub size="24px" />
-          </Link>
-          <Link href="https://www.linkedin.com/in/yogesh-kumar-mallik-1254281b2/" isExternal _hover={{ color: 'brand.500', transform: 'scale(1.2)' }} transition="all 0.2s">
+          </a>
+          <a
+            href="https://www.linkedin.com/in/yogesh-kumar-mallik-1254281b2/"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-all duration-200 hover:text-[#64ffda] hover:scale-125"
+          >
             <FaLinkedin size="24px" />
-          </Link>
-          <Link href="https://instagram.com/yogesh_kumar.05" isExternal _hover={{ color: 'brand.500', transform: 'scale(1.2)' }} transition="all 0.2s">
+          </a>
+          <a
+            href="https://instagram.com/yogesh_kumar.05"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-all duration-200 hover:text-[#64ffda] hover:scale-125"
+          >
             <FaInstagram size="24px" />
-          </Link>
-        </HStack>
-        <Text fontSize="sm" color="gray.500">&copy; 2025 Yogesh Kumar Mallik. All rights reserved.</Text>
-      </VStack>
-    </Box>
+          </a>
+        </div>
+        {/* Copyright Area */}
+        <p className="text-sm text-gray-500">
+          &copy; {new Date().getFullYear()} Yogesh Kumar Mallik. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }
 

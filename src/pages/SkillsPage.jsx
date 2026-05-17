@@ -1,91 +1,55 @@
-import { Box, Heading, Tag, TagLabel, Wrap, WrapItem, VStack, Text, Divider } from '@chakra-ui/react';
+import React from 'react';
 import PageTransition from '../components/PageTransition';
 
 function SkillsPage() {
   const skillGroups = [
     {
-      title: 'Programming/Core',
-      skills: ['Java', 'Python', 'JavaScript']
+      title: 'Programming Languages & Core',
+      skills: ['Java', 'Python', 'JavaScript', 'SQL', 'HTML5', 'CSS3', 'TypeScript']
     },
     {
-      title: 'Data/Backend',
-      skills: ['DBMS', 'MySQL', 'Data Structure and Algorithms (DSA)']
+      title: 'Backend & Databases',
+      skills: ['Spring Boot', 'Spring Security', 'Spring MVC', 'Hibernate', 'JPA', 'Flask', 'FastAPI', 'RESTful APIs', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis']
     },
     {
-      title: 'Frontend/UI',
-      skills: ['HTML5', 'CSS3', 'Bootstrap 5', 'React']
+      title: 'Frontend & UI Frameworks',
+      skills: ['React.js', 'Next.js', 'Tailwind CSS', 'Bootstrap 5']
     },
     {
-      title: 'Tools/Other',
-      skills: ['Node.js', 'Git & GitHub', 'Responsive Design']
+      title: 'Cloud, DevOps & Tools',
+      skills: ['AWS (EC2, S3, RDS)', 'Docker', 'Jenkins', 'CI/CD', 'Git & GitHub', 'Postman', 'Maven']
     },
   ];
 
-  const skillTagProps = {
-    size: 'lg',
-    borderRadius: 'full',
-    variant: 'solid',
-    colorScheme: 'teal',
-    p: 4,
-    fontSize: 'md',
-    fontWeight: 'normal',
-    justifyContent: 'center',
-  };
-
-  const groupTitleProps = {
-    fontSize: 'xl',
-    fontWeight: 'bold',
-    color: 'teal.300',
-    mb: 3,
-    mt: 6,
-    alignSelf: 'flex-start',
-  };
-
   return (
     <PageTransition>
-      <VStack spacing={10} p={5}>
-        <Heading size="xl">Skills</Heading>
+      <div className="max-w-4xl mx-auto py-10 px-6 flex flex-col items-center">
+        <h1 className="text-3xl font-bold text-gray-100 mb-10">Skills</h1>
 
-        <Box
-          w="100%"
-          maxW="700px"
-          p={8}
-          bg="gray.700"
-          borderRadius="xl"
-          boxShadow="2xl"
-        >
-          <VStack spacing={4} align="stretch">
+        <div className="w-full max-w-2xl bg-[#112240] p-6 md:p-8 rounded-xl border border-slate-800 shadow-xl space-y-6">
+          {skillGroups.map((group, index) => (
+            <div key={group.title}>
+              <h3 className="text-lg font-bold text-[#64ffda] mb-3">
+                {group.title}
+              </h3>
 
-            {skillGroups.map((group, index) => (
-              <Box key={group.title}>
-
-                <Text {...groupTitleProps}>
-                  {group.title}
-                </Text>
-
-                <Wrap spacing={3} justify={{ base: 'flex-start', md: 'flex-start' }}>
-                  {group.skills.map((skill) => (
-                    <WrapItem
-                      key={skill}
-                      w={skill.includes('(DSA)') ? { base: '100%', sm: 'auto' } : 'auto'}
-                    >
-                      <Tag
-                        {...skillTagProps}
-                        w={skill.includes('(DSA)') ? '100%' : 'auto'}
-                      >
-                        <TagLabel>{skill}</TagLabel>
-                      </Tag>
-                    </WrapItem>
-                  ))}
-                </Wrap>
-                {index < skillGroups.length - 1 && <Divider my={4} borderColor="gray.600" />}
-
-              </Box>
-            ))}
-
-          </VStack>
-        </Box>
-      </VStack>
+              <div className="flex flex-wrap gap-2.5">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-sm font-medium bg-slate-900/60 text-gray-300 border border-slate-800 px-3.5 py-1.5 rounded-full hover:border-[#64ffda]/40 transition duration-200 cursor-default"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              {index < skillGroups.length - 1 && (
+                <hr className="my-5 border-slate-800" />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </PageTransition>
   );
 }

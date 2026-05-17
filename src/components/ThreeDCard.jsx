@@ -1,10 +1,5 @@
-// src/components/ThreeDCard.jsx
-import { Box } from '@chakra-ui/react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import React, { useRef } from 'react';
-
-// Wrap Box with motion so it can be animated
-const MotionBox = motion.create(Box);
 
 function ThreeDCard({ children }) {
   const ref = useRef(null);
@@ -37,7 +32,7 @@ function ThreeDCard({ children }) {
   };
 
   return (
-    <MotionBox
+    <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -46,23 +41,13 @@ function ThreeDCard({ children }) {
         rotateX,
         rotateY,
       }}
-      // Use Chakra UI style props
-      p={6}
-      bg="rgba(23, 25, 35, 0.5)"
-      backdropFilter="blur(10px)"
-      border="1px"
-      borderColor="rgba(255, 255, 255, 0.18)"
-      borderRadius="lg"
-      transition="all 0.3s ease"
-      _hover={{
-        borderColor: 'brand.500',
-        boxShadow: '0 0 25px rgba(100, 255, 218, 0.4)',
-      }}
+      // Pure Tailwind CSS Classes matching your premium dark hover shadow
+      className="p-6 bg-[#112240]/50 backdrop-blur-[10px] border border-white/10 rounded-lg transition-colors duration-300 hover:border-[#64ffda] hover:shadow-[0_0_25px_rgba(100,255,218,0.4)] w-full"
     >
       <div style={{ transform: 'translateZ(50px)', transformStyle: 'preserve-3d' }}>
         {children}
       </div>
-    </MotionBox>
+    </motion.div>
   );
 }
 

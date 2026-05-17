@@ -1,70 +1,56 @@
-// src/pages/AboutPage.jsx
-import { Container, Heading, Text, VStack, SimpleGrid, Box } from '@chakra-ui/react';
+import React from 'react';
 import { FaCamera, FaPlane, FaBook, FaGamepad, FaUtensils } from 'react-icons/fa';
 import ThreeDCard from '../components/ThreeDCard';
 import PageTransition from '../components/PageTransition';
 
 function AboutPage() {
+  const hobbies = [
+    { icon: <FaCamera size="40px" />, label: 'Photography' },
+    { icon: <FaPlane size="40px" />, label: 'Traveling' },
+    { icon: <FaBook size="40px" />, label: 'Reading' },
+    { icon: <FaGamepad size="40px" />, label: 'Gaming' },
+    { icon: <FaUtensils size="40px" />, label: 'Cooking' },
+  ];
+
   return (
     <PageTransition>
-      <Container maxW="container.lg" py={10}>
-        <VStack spacing={12}>
-          <Heading as="h1" color="gray.100">About Me</Heading>
+      <div className="max-w-4xl mx-auto py-10 px-6">
+        <div className="flex flex-col space-y-12 items-center">
+          <h2 className="text-3xl font-bold text-gray-100 border-b border-[#64ffda]/20 pb-2">About Me</h2>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} w="100%">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
             <ThreeDCard>
-              <Heading size="md" mb={4} color="brand.500">My Story</Heading>
-              <Text fontSize="lg">
-                Hello! I'm Yogesh, a passionate web developer...
-              </Text>
+              <h3 className="text-xl font-bold mb-4 text-[#64ffda]">My Story</h3>
+              <p className="text-md text-gray-300 leading-relaxed">
+                Hello! I'm Yogesh Kumar Mallik, a Computer Science undergraduate currently pursuing my degree at Pimpri Chinchwad University, Pune. I specialize in crafting robust web architectures, bridging the gap between dynamic frontend layers and highly optimized backend microservices.
+              </p>
             </ThreeDCard>
 
             <ThreeDCard>
-              <Heading size="md" mb={4} color="brand.500">Hobbies & Interests</Heading>
-              <Text fontSize="lg">
-                When I'm not coding, I enjoy doing several things.
-              </Text>
+              <h3 className="text-xl font-bold mb-4 text-[#64ffda]">Professional Target</h3>
+              <p className="text-md text-gray-300 leading-relaxed">
+                I have hands-on experience working with tools like React.js, Next.js, and Spring Boot. My goal is to build secure, scalable solutions that consume optimal resources while offering real-time performance updates and sub-millisecond responsiveness.
+              </p>
             </ThreeDCard>
-          </SimpleGrid>
+          </div>
 
-          <Box w="100%">
-            <Heading size="lg" mb={8} textAlign="center" color="gray.100">My Hobbies</Heading>
+          <div className="w-full">
+            <h3 className="text-2xl font-semibold mb-8 text-center text-gray-100">My Hobbies</h3>
 
-            <SimpleGrid columns={{ base: 2, md: 5 }} spacing={{ base: 6, md: 8 }}>
-              <Box as="a" textAlign="center" transition="all 0.2s" _hover={{ transform: 'scale(1.1)', color: 'brand.500' }}>
-                <VStack>
-                  <FaCamera size="40px" />
-                  <Text>Photography</Text>
-                </VStack>
-              </Box>
-              <Box as="a" textAlign="center" transition="all 0.2s" _hover={{ transform: 'scale(1.1)', color: 'brand.500' }}>
-                <VStack>
-                  <FaPlane size="40px" />
-                  <Text>Traveling</Text>
-                </VStack>
-              </Box>
-              <Box as="a" textAlign="center" transition="all 0.2s" _hover={{ transform: 'scale(1.1)', color: 'brand.500' }}>
-                <VStack>
-                  <FaBook size="40px" />
-                  <Text>Reading</Text>
-                </VStack>
-              </Box>
-              <Box as="a" textAlign="center" transition="all 0.2s" _hover={{ transform: 'scale(1.1)', color: 'brand.500' }}>
-                <VStack>
-                  <FaGamepad size="40px" />
-                  <Text>Gaming</Text>
-                </VStack>
-              </Box>
-              <Box as="a" textAlign="center" transition="all 0.2s" _hover={{ transform: 'scale(1.1)', color: 'brand.500' }}>
-                <VStack>
-                  <FaUtensils size="40px" />
-                  <Text>Cooking</Text>
-                </VStack>
-              </Box>
-            </SimpleGrid>
-          </Box>
-        </VStack>
-      </Container>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-300">
+              {hobbies.map((hobby, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center space-y-2 transition-all duration-200 transform hover:scale-110 hover:text-[#64ffda] cursor-default"
+                >
+                  {hobby.icon}
+                  <span className="text-sm font-medium">{hobby.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </PageTransition>
   );
 }

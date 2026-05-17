@@ -1,55 +1,62 @@
-// src/pages/CertificatesPage.jsx
-import { Container, Heading, VStack, Link, Icon, Text } from '@chakra-ui/react';
+import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import ThreeDCard from '../components/ThreeDCard'; // Import the component
+import ThreeDCard from '../components/ThreeDCard';
 import PageTransition from '../components/PageTransition';
 
 const certificateData = [
   {
-    name: 'Blockchain Specialization Certificate - Coursera',
-    url: 'https://coursera.org/verify/specialization/41LNBIK6BJ3G',
+    name: 'IBM Machine Learning Professional Certificate (2026)',
+    url: 'https://coursera.org/',
+    issuer: 'IBM'
   },
   {
-    name: 'Software Engineering Specialization Certificate - Coursera',
+    name: 'Software Engineering Specialization, HKUST (Coursera 2025)',
     url: 'https://coursera.org/verify/specialization/SL67DW63RDI8',
+    issuer: 'HKUST'
   },
   {
-    name: 'RedHat Application Development Certificate',
-    url: '/RedHat_Application_Development.pdf',
+    name: 'AWS Academy Data Engineering Virtual Internship, AICTE EduSkills (2024)',
+    url: 'https://coursera.org/',
+    issuer: 'AWS Academy'
   },
   {
-    name: 'Animal Detection Project using Python & yolov5',
-    url: 'https://github.com/YogeshKumar-0/Animal-Detection',
-  },
+    name: 'Oracle Cloud Infrastructure AI Foundations Associate',
+    url: 'https://coursera.org/',
+    issuer: 'Oracle'
+  }
 ];
 
 function CertificatesPage() {
   return (
     <PageTransition>
-      <Container maxW="container.md" py={10}>
-        <VStack spacing={6}>
-          <Heading as="h1" color="gray.100">Certificates & Projects</Heading>
+      <div className="max-w-2xl mx-auto py-10 px-6">
+        <h1 className="text-3xl font-bold text-center text-gray-100 mb-10">Certificates</h1>
+        <div className="space-y-4">
           {certificateData.map((cert, index) => (
-            <Link
+            <a
               key={index}
               href={cert.url}
-              isExternal
-              w="100%"
-              _hover={{ textDecoration: 'none' }}
+              target="_blank"
+              rel="noreferrer"
+              className="block w-full no-underline group"
             >
-              {/* Replace the inner <Box> with <ThreeDCard> */}
-              <ThreeDCard
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Text fontWeight="medium" color="gray.200">{cert.name}</Text>
-                <Icon as={FaExternalLinkAlt} color="gray.400" />
+              <ThreeDCard>
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-gray-200 group-hover:text-[#64ffda] font-medium transition duration-150">
+                      {cert.name}
+                    </span>
+                    <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">
+                      {cert.issuer}
+                    </span>
+                  </div>
+                  <FaExternalLinkAlt className="text-gray-400 group-hover:text-[#64ffda] transition duration-150 w-4 h-4 flex-shrink-0 ml-4" />
+                </div>
               </ThreeDCard>
-            </Link>
+            </a>
           ))}
-        </VStack>
-      </Container>
+        </div>
+      </div>
     </PageTransition>
   );
 }

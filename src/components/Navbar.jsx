@@ -1,25 +1,24 @@
-import { Box, Flex, HStack, Heading, Link, IconButton, useDisclosure, Drawer, DrawerBody, DrawerOverlay, DrawerContent, DrawerCloseButton, VStack } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 
-function Navbar() {
-  // Hook to manage the state of the mobile menu (isOpen, onOpen, onClose)
-  const { isOpen, onOpen, onClose } = useDisclosure();
+function Navbar({ activeSection }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Define the set of navigation links
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Education', path: '/education' },
-    { name: 'Skills', path: '/skills' },
-    { name: 'Certificates', path: '/certificates' },
-    { name: 'About', path: '/about' },
+    { name: 'Home', id: 'home' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Education', id: 'education' },
+    { name: 'Skills', id: 'skills' },
+    { name: 'Certificates', id: 'certificates' },
+    { name: 'About', id: 'about' },
   ];
 
-  const linkStyles = {
-    _hover: { color: 'brand.500', transform: 'scale(1.1)' },
-    transition: 'all 0.2s ease-in-out',
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
   };
 
   return (
@@ -27,80 +26,97 @@ function Navbar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
+      className="sticky top-0 z-50 w-full"
     >
-      <Box
-        bg="rgba(10, 25, 47, 0.85)"
-        backdropFilter="blur(8px)"
-        px={8}
-        boxShadow="sm"
-        position="sticky"
-        top={0}
-        zIndex="banner"
-      >
-        <Flex h={16} alignItems="center" justifyContent="space-between">
-          {/* Site Title / Brand */}
-          <Heading size="md" color="brand.500" minW="max-content">Yogesh Kumar Mallik</Heading>
+      <nav className="bg-[#0a192f]/85 backdrop-blur-md px-6 md:px-12 h-16 flex items-center justify-between border-b border-slate-800 shadow-sm">
+        {/* Brand Logo */}
+        <h1
+          className="text-xl font-bold tracking-tight text-[#64ffda] cursor-pointer"
+          onClick={() => scrollToSection('home')}
+        >
+          Yogesh Kumar Mallik
+        </h1>
 
-          {/* 1. Desktop Navigation Links (Visible only on large screens) */}
-          <Box
-            flexGrow={1}
-            textAlign="center"
-            display={{ base: 'none', md: 'block' }} // Hide on mobile
-          >
-            <HStack
-              as={'nav'}
-              spacing={6}
-              justifyContent="center"
-              // Hides the horizontal menu on small screens ('base')
-              display="inline-flex"
+        {/* 1. Desktop Links */}
+        <div className="hidden md:flex items-center space-x-8">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.id)}
+                className={`text-sm tracking-wide capitalize transition-all duration-200 hover:text-[#64ffda] hover:scale-105 pb-1 border-b-2 ${isActive
+                    ? 'text-[#64ffda] font-bold border-[#64ffda]'
+                    : 'text-gray-300 border-transparent'
+                  }`}
+              >
+                {link.name}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 2. Mobile Menu Toggle Trigger */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="block md:hidden text-gray-300 hover:text-[#64ffda] p-2 focus:outline-none"
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? (
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
+      </nav>
+
+      {/* 3. Mobile Collapsible Drawer Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <div
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            {/* Slide-out Panel */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="fixed top-0 left-0 bottom-0 w-64 bg-[#0a192f]/95 border-r border-slate-800 z-50 p-6 pt-16 md:hidden flex flex-col space-y-6"
             >
-              {navLinks.map((link) => (
-                <Link key={link.name} as={RouterLink} to={link.path} {...linkStyles}>
-                  {link.name}
-                </Link>
-              ))}
-            </HStack>
-          </Box>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-4 right-4 text-gray-300 hover:text-[#64ffda]"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
 
-          {/* 2. Mobile Menu Icon (Visible only on small screens) */}
-          <IconButton
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            // Shows the icon on small screens ('base')
-            display={{ base: 'block', md: 'none' }}
-            onClick={onOpen} // This will trigger the Drawer to open
-          />
-        </Flex>
-
-        <Box
-          display={{ base: 'none', md: 'block' }}
-          minW="max-content"
-        />
-
-        {/* 3. Mobile Collapsible Menu (The Drawer) */}
-        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-          <DrawerOverlay />
-          {/* Set background to match your design */}
-          <DrawerContent bg="rgba(10, 25, 47, 0.95)">
-            <DrawerCloseButton />
-            {/* Use VStack for the vertical list of links */}
-            <VStack
-              align="left"
-              spacing={4}
-              p={8}
-              pt={12} // Give some extra top padding
-              onClick={onClose} // Closes the drawer when a link is clicked
-            >
-              {navLinks.map((link) => (
-                <Link key={link.name} as={RouterLink} to={link.path} fontSize="xl" {...linkStyles}>
-                  {link.name}
-                </Link>
-              ))}
-            </VStack>
-          </DrawerContent>
-        </Drawer>
-      </Box>
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <button
+                    key={link.name}
+                    onClick={() => scrollToSection(link.id)}
+                    className={`text-xl text-left transition-all duration-200 hover:text-[#64ffda] ${isActive ? 'text-[#64ffda] font-bold' : 'text-gray-300'
+                      }`}
+                  >
+                    {link.name}
+                  </button>
+                );
+              })}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

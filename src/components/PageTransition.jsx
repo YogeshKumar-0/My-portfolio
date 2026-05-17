@@ -3,15 +3,11 @@ import { motion } from "framer-motion";
 const variants = {
     initial: {
         opacity: 0,
-        y: 40
+        y: 30
     },
     animate: {
         opacity: 1,
         y: 0
-    },
-    exit: {
-        opacity: 0,
-        y: -40
     }
 };
 
@@ -20,12 +16,13 @@ function PageTransition({ children }) {
         <motion.div
             variants={variants}
             initial="initial"
-            animate="animate"
-            exit="exit"
+            whileInView="animate" // Viewport scroll control me aate hi lazy transition chalegi
+            viewport={{ once: true, margin: "-100px" }}
             transition={{
-                duration: 0.45,
+                duration: 0.6,
                 ease: "easeInOut"
             }}
+            className="w-full"
         >
             {children}
         </motion.div>

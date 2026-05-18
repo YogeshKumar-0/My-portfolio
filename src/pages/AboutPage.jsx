@@ -1,57 +1,109 @@
 import React from 'react';
-import { FaCamera, FaPlane, FaBook, FaGamepad, FaUtensils } from 'react-icons/fa';
+import {
+  FaCamera,
+  FaPlane,
+  FaBook,
+  FaGamepad,
+  FaUtensils,
+} from 'react-icons/fa';
+
 import ThreeDCard from '../components/ThreeDCard';
-import PageTransition from '../components/PageTransition';
+import Reveal from '../components/Reveal';
 
 function AboutPage() {
   const hobbies = [
-    { icon: <FaCamera size="40px" />, label: 'Photography' },
-    { icon: <FaPlane size="40px" />, label: 'Traveling' },
-    { icon: <FaBook size="40px" />, label: 'Reading' },
-    { icon: <FaGamepad size="40px" />, label: 'Gaming' },
-    { icon: <FaUtensils size="40px" />, label: 'Cooking' },
+    { icon: <FaCamera className="text-2xl" />, label: 'Photography' },
+    { icon: <FaPlane className="text-2xl" />, label: 'Traveling' },
+    { icon: <FaBook className="text-2xl" />, label: 'Reading' },
+    { icon: <FaGamepad className="text-2xl" />, label: 'Gaming' },
+    { icon: <FaUtensils className="text-2xl" />, label: 'Cooking' },
   ];
 
   return (
-    <PageTransition>
-      <div className="max-w-4xl mx-auto py-10 px-6">
-        <div className="flex flex-col space-y-12 items-center">
-          <h2 className="text-3xl font-bold text-gray-100 border-b border-[#64ffda]/20 pb-2">About Me</h2>
+    <div className="max-w-4xl mx-auto pt-10 pb-4 px-4 w-full text-left">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
-            <ThreeDCard>
-              <h3 className="text-xl font-bold mb-4 text-[#64ffda]">My Story</h3>
-              <p className="text-md text-gray-300 leading-relaxed">
-                Hello! I'm Yogesh Kumar Mallik, a Computer Science undergraduate currently pursuing my degree at Pimpri Chinchwad University, Pune. I specialize in crafting robust web architectures, bridging the gap between dynamic frontend layers and highly optimized backend microservices.
-              </p>
-            </ThreeDCard>
+      <div className="flex flex-col space-y-12 items-center w-full">
 
-            <ThreeDCard>
-              <h3 className="text-xl font-bold mb-4 text-[#64ffda]">Professional Target</h3>
-              <p className="text-md text-gray-300 leading-relaxed">
-                I have hands-on experience working with tools like React.js, Next.js, and Spring Boot. My goal is to build secure, scalable solutions that consume optimal resources while offering real-time performance updates and sub-millisecond responsiveness.
-              </p>
-            </ThreeDCard>
+        <Reveal>
+          <div className="flex flex-col items-center">
+
+            <span className="text-[#64ffda] uppercase tracking-[0.3em] text-sm font-semibold mb-3">
+              Introduction
+            </span>
+
+            <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-100 tracking-tight">
+              About Me
+            </h2>
+
+            <div className="w-24 h-[3px] bg-gradient-to-r from-[#64ffda] to-blue-500 rounded-full mt-5"></div>
+
           </div>
+        </Reveal>
 
-          <div className="w-full">
-            <h3 className="text-2xl font-semibold mb-8 text-center text-gray-100">My Hobbies</h3>
+        <Reveal delay={0.15}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-300">
+            <ThreeDCard>
+              <div className="text-left flex flex-col space-y-3">
+
+                <h3 className="text-xl font-bold text-[#64ffda] block">
+                  My Story
+                </h3>
+
+                <p className="text-md text-gray-300 leading-relaxed block">
+                  I'm Yogesh Kumar Mallik, a Computer Science undergraduate focused on full-stack development, scalable backend systems, and modern frontend engineering. I enjoy building performant applications that combine clean UI architecture with efficient APIs and real-time capabilities.
+                </p>
+
+              </div>
+            </ThreeDCard>
+
+            <ThreeDCard>
+              <div className="text-left flex flex-col space-y-3">
+
+                <h3 className="text-xl font-bold text-[#64ffda] block">
+                  Professional Target
+                </h3>
+
+                <p className="text-md text-gray-300 leading-relaxed block">
+                  My current focus is strengthening expertise in React.js, Spring Boot, cloud infrastructure, and distributed systems. I aim to contribute to high-impact engineering teams working on scalable products and performance-driven software solutions.
+                </p>
+
+              </div>
+            </ThreeDCard>
+
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <div className="w-full block pt-6">
+
+            <h3 className="text-2xl font-semibold mb-8 text-center text-gray-100 tracking-wide block">
+              My Hobbies
+            </h3>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-300 w-full">
+
               {hobbies.map((hobby, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center space-y-2 transition-all duration-200 transform hover:scale-110 hover:text-[#64ffda] cursor-default"
+                  className="flex flex-col items-center justify-center p-4 bg-[#112240]/40 border border-slate-800/40 rounded-xl transition-all duration-200 transform hover:scale-110 hover:text-[#64ffda] cursor-default text-center space-y-3"
                 >
                   {hobby.icon}
-                  <span className="text-sm font-medium">{hobby.label}</span>
+
+                  <span className="text-sm font-medium block">
+                    {hobby.label}
+                  </span>
+
                 </div>
               ))}
+
             </div>
+
           </div>
-        </div>
+        </Reveal>
+
       </div>
-    </PageTransition>
+    </div>
   );
 }
 

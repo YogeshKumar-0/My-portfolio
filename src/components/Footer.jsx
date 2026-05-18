@@ -36,6 +36,9 @@ function Footer() {
         <p className="text-sm text-gray-500">
           &copy; {new Date().getFullYear()} Yogesh Kumar Mallik. All rights reserved.
         </p>
+        <p className="text-sm text-gray-500">
+          Made by <span className="text-[#64ffda]">Yogesh Kumar Mallik</span>
+        </p>
       </div>
     </footer>
   );

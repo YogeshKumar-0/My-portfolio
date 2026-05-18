@@ -10,8 +10,8 @@ function ThreeDCard({ children }) {
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['12.5deg', '-12.5deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-12.5deg', '12.5deg']);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['8deg', '-8deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-8deg', '8deg']);
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -41,10 +41,12 @@ function ThreeDCard({ children }) {
         rotateX,
         rotateY,
       }}
-      // Pure Tailwind CSS Classes matching your premium dark hover shadow
-      className="p-6 bg-[#112240]/50 backdrop-blur-[10px] border border-white/10 rounded-lg transition-colors duration-300 hover:border-[#64ffda] hover:shadow-[0_0_25px_rgba(100,255,218,0.4)] w-full"
+      className="relative p-6 md:p-8 bg-[#112240]/60 backdrop-blur-xl border border-white/5 rounded-xl transition-all duration-300 hover:bg-[#112240]/90 hover:border-[#64ffda]/50 hover:shadow-[0_0_30px_rgba(100,255,218,0.15)] w-full group overflow-hidden text-left"
     >
-      <div style={{ transform: 'translateZ(50px)', transformStyle: 'preserve-3d' }}>
+      {/* Decorative inner glow on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500 bg-gradient-to-br from-[#64ffda]/5 to-transparent"></div>
+
+      <div style={{ transform: 'translateZ(40px)', transformStyle: 'preserve-3d' }} className="relative z-10 w-full">
         {children}
       </div>
     </motion.div>

@@ -1,27 +1,30 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import ThreeDCard from '../components/ThreeDCard';
-import PageTransition from '../components/PageTransition';
+import Reveal from '../components/Reveal';
 
 const projects = [
   {
-    title: 'MedGuard AI | AI-Powered Clinical Risk Detection Platform',
-    description: 'Engineered a full-stack AI healthcare analysis platform using FastAPI, Next.js, and Groq LLMs for real-time clinical risk assessment. Developed asynchronous multi-agent diagnostic workflows for symptom analysis and drug interaction detection[cite: 31, 32, 33].',
-    tags: ['Python', 'FastAPI', 'Groq API', 'Next.js', 'TypeScript', 'Tailwind'],
-    codeUrl: 'https://github.com/YogeshKumar-0',
-    liveUrl: 'https://yogesh-mallik.vercel.app/',
+    title: 'MedGuard AI',
+    description:
+      'AI-powered healthcare risk analysis platform built with FastAPI, Next.js, and Groq LLMs featuring asynchronous diagnostic workflows and real-time clinical assessment.',
+    tags: ['Python', 'FastAPI', 'Groq API', 'Next.js', 'TypeScript'],
+    codeUrl: 'https://github.com/YogeshKumar-0/MedGuardAI',
+    liveUrl: 'http://medguardlive.vercel.app/',
   },
   {
-    title: 'Styora | Full-Stack E-Commerce Platform',
-    description: 'Architected a scalable full-stack e-commerce application using Spring Boot and React with JWT authentication[cite: 66, 67]. Migrated application data to cloud-hosted PostgreSQL (Supabase) and optimized Vercel CI/CD pipelines[cite: 68, 69].',
-    tags: ['Java', 'Spring Boot', 'React.js', 'PostgreSQL', 'Supabase', 'JWT'],
-    codeUrl: 'https://github.com/YogeshKumar-0',
-    liveUrl: 'https://yogesh-mallik.vercel.app/',
+    title: 'Styora E-Commerce Platform',
+    description:
+      'Full-stack e-commerce platform using Spring Boot and React with JWT authentication, PostgreSQL integration, and optimized CI/CD deployment pipelines.',
+    tags: ['Java', 'Spring Boot', 'React.js', 'PostgreSQL', 'JWT'],
+    codeUrl: 'https://github.com/YogeshKumar-0/Styora',
+    liveUrl: 'http://styora.vercel.app/',
   },
   {
-    title: 'IoT-Integrated Wildlife Monitoring System',
-    description: 'Architected a distributed IoT system with ESP32-CAM nodes and PIR sensors; reduced idle power consumption by 65% via Deep-Sleep optimization and achieved sub-150ms inference over local Wi-Fi using YOLOv5[cite: 56, 59, 60, 61].',
-    tags: ['Python', 'YOLOv5', 'ESP32', 'OpenCV', 'Flask', 'C++'],
+    title: 'Wildlife Monitoring System',
+    description:
+      'Distributed IoT wildlife monitoring system using ESP32-CAM nodes, YOLOv5 inference, PIR sensors, and low-power optimization for real-time detection.',
+    tags: ['Python', 'YOLOv5', 'ESP32', 'OpenCV', 'Flask'],
     codeUrl: 'https://github.com/YogeshKumar-0/Animal-Detection',
     liveUrl: '#',
   },
@@ -29,52 +32,83 @@ const projects = [
 
 function ProjectsPage() {
   return (
-    <PageTransition>
-      <div className="max-w-6xl mx-auto py-10 px-6">
-        <h1 className="text-3xl font-bold text-center text-gray-100 mb-10">
-          My Projects
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="w-full max-w-6xl mx-auto pt-10 pb-4 px-4 text-left">
+
+      <Reveal>
+        <div className="flex flex-col items-center mb-14">
+          <span className="text-[#64ffda] uppercase tracking-[0.3em] text-sm font-semibold mb-3">
+            Portfolio
+          </span>
+
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-100 tracking-tight">
+            Featured Projects
+          </h2>
+
+          <div className="w-24 h-[3px] bg-gradient-to-r from-[#64ffda] to-blue-500 rounded-full mt-5"></div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={0.15}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+
           {projects.map((project, index) => (
             <ThreeDCard key={index}>
-              <div className="flex flex-col h-full justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-[#64ffda] mb-3">{project.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-col h-full justify-between space-y-4 text-left">
+
+                <div className="block w-full">
+                  <h3 className="text-2xl font-bold text-[#64ffda] mb-3 leading-tight">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-400 text-[15px] mb-5 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 w-full pt-2">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="text-xs font-medium bg-slate-800 text-gray-300 px-2.5 py-1 rounded-md border border-slate-700">
+                      <span
+                        key={tag}
+                        className="inline-block text-[11px] font-semibold bg-slate-800/90 text-gray-300 px-2.5 py-1 rounded border border-slate-700/50 whitespace-nowrap"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="flex space-x-4 pt-2">
+
+                <div className="flex items-center space-x-4 pt-4 border-t border-slate-800/40 w-full">
+
                   <a
                     href={project.codeUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-gray-200 text-xs font-semibold px-4 py-2 rounded transition border border-slate-700"
+                    className="inline-flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-gray-200 text-[12px] font-bold px-4 py-2.5 rounded-lg transition duration-200 border border-slate-700 hover:border-[#64ffda]/30"
                   >
-                    <FaGithub /> View Code
+                    <FaGithub />
+                    View Code
                   </a>
+
                   {project.liveUrl && project.liveUrl !== '#' && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 bg-[#64ffda]/10 text-[#64ffda] hover:bg-[#64ffda]/20 text-xs font-semibold px-4 py-2 rounded transition border border-[#64ffda]/30"
+                      className="inline-flex items-center gap-2 bg-[#64ffda]/10 text-[#64ffda] hover:bg-[#64ffda]/20 text-[12px] font-bold px-4 py-2.5 rounded-lg transition duration-200 border border-[#64ffda]/30"
                     >
-                      <FaExternalLinkAlt className="w-3 h-3" /> Live Demo
+                      <FaExternalLinkAlt className="w-3 h-3" />
+                      Live Demo
                     </a>
                   )}
+
                 </div>
               </div>
             </ThreeDCard>
           ))}
+
         </div>
-      </div>
-    </PageTransition>
+      </Reveal>
+
+    </div>
   );
 }
 
